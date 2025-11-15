@@ -2,7 +2,7 @@ import { StatusBar, useColorScheme } from 'react-native';
 import {
   SafeAreaProvider,
 } from 'react-native-safe-area-context';
-import { SongListScreen } from './src/screens/SongListScreen';
+import { SongListScreen } from './src/screens/SongsList';
 
 function App() {
   const isDarkMode = useColorScheme() === 'dark';
