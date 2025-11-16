@@ -28,8 +28,8 @@ export const SongCard = ({ song, onPress }: ISongCardProps) => {
         borderWidth={1}
         style={styles.card}
       >
-        <Row center isSpaceBetween style={{flex: 1}}>
-          <Row center style={{flex: 1}}>
+        <Row center isSpaceBetween style={styles.outerRow}>
+          <Row center style={styles.innerRow}>
             {/* Thumbnail */}
             <Image source={{ uri: song.thumbnail }} style={styles.thumbnail} />
 
@@ -62,7 +62,11 @@ export const SongCard = ({ song, onPress }: ISongCardProps) => {
 
           {/* Download Button */}
           <View style={styles.downloadButtonContainer}>
-            <DownloadButton onPress={handleDownload} />
+            <DownloadButton
+              onPress={handleDownload}
+              state="downloading"
+              progress={10}
+            />
           </View>
         </Row>
       </Card>

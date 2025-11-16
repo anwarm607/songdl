@@ -11,6 +11,7 @@ export const DownloadIcon = (props: IconProps) => {
       height={24}
       fill="none"
       stroke="currentColor"
+      viewBox="0 0 24 24"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={2}

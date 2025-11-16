@@ -13,6 +13,7 @@ interface IButton {
   size?: ButtonSizesKeys;
   borderWidth?: number;
   borderColor?: ColorKeys;
+  disabled?: boolean;
 }
 
 export const Button = (props: IButton) => {
@@ -23,7 +24,8 @@ export const Button = (props: IButton) => {
     children,
     size = 'm',
     borderWidth = 0,
-    borderColor = 'border'
+    borderColor = 'border',
+    disabled
   } = props;
   const colors = lightColors;
   const getShapeStyles = () => {
@@ -81,7 +83,7 @@ export const Button = (props: IButton) => {
     }
   ]);
   return (
-    <TouchableOpacity onPress={onPress} style={buttonStyles}>
+    <TouchableOpacity onPress={onPress} style={buttonStyles} disabled={disabled}>
       {children}
     </TouchableOpacity>
   );

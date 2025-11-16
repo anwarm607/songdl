@@ -22,6 +22,12 @@ export const styles = StyleSheet.create({
     marginVertical: 8,
   },
   card: {
-    flex: 1
-  }
+    flex: 1,
+  },
+  outerRow: {
+    flex: 1,
+  },
+  innerRow: {
+    flex: 1,
+  },
 });
