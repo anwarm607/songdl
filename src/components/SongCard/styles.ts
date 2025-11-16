@@ -11,21 +11,15 @@ export const styles = StyleSheet.create({
     marginLeft: 12,
   },
   title: {
-    fontSize: 16,
-    fontWeight: '600',
     marginBottom: 4,
   },
-    artist: {
-    fontSize: 13,
+  artist: {
     marginBottom: 2,
-  },
-  album: {
-    fontSize: 12,
   },
   downloadButtonContainer: {
     marginLeft: 12,
   },
   container: {
     marginVertical: 8,
-  }
+  },
 });
