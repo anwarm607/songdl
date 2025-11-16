@@ -1,42 +1,36 @@
 import React from 'react';
-import { FlatList, Text } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList, View } from 'react-native';
 import { styles } from './styles';
-import { lightColors } from '../../theme';
 import { mockSongs } from './mock';
 import { SongCard } from '../../components/SongCard';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../navigation/types';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 export const SongListScreen = () => {
-  const colors = lightColors;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
-  const handleSongPress = (id: string) =>{
-    console.log("Clicked", id)
-  }
+  const handleSongPress = (id: string) => {
+    navigation.navigate('SongDetails', {
+      songId: id,
+    });
+  };
+  
   return (
-    <SafeAreaView>
-      <Text
-        style={[
-          styles.header,
-          {
-            color: colors.text,
-          },
-        ]}
-      >
-        Songs
-      </Text>
-
+    <View>
       <FlatList
-        data={mockSongs}
+        data={[...mockSongs, ...mockSongs]}
         keyExtractor={item => item.id}
         contentContainerStyle={styles.listContainer}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
-          <SongCard
-            song={item}
-            onPress={() => handleSongPress(item.id)}
-          />
+          <SongCard song={item} onPress={() => handleSongPress(item.id)} />
         )}
-        scrollIndicatorInsets={{ right: 1 }}
+        contentInset={{
+          bottom: 120,
+        }}
       />
-    </SafeAreaView>
+    </View>
   );
 };

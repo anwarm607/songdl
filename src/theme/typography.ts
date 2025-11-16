@@ -110,13 +110,6 @@ export const typography = {
     fontWeight: '400' as const,
     lineHeight: 14,
   } as TypographyStyle,
-
-  // Navigation header
-  navHeader: {
-    fontSize: 18,
-    fontWeight: '600' as const,
-    lineHeight: 24,
-  } as TypographyStyle,
 } as const;
 
 export type TypographyKey = keyof typeof typography;
