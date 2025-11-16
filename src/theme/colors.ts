@@ -4,6 +4,7 @@ export const lightColors = {
   background: '#ffffff',
   surface: '#f9fafb',
   text: '#1f2937',
+  textWhite: '#ffffff',
   textSecondary: '#6b7280',
   border: '#e5e7eb',
   success: '#10b981',
@@ -18,6 +19,7 @@ export const darkColors = {
   background: '#1f2937',
   surface: '#374151',
   text: '#f9fafb',
+  textWhite: '#ffffff',
   textSecondary: '#d1d5db',
   border: '#4b5563',
   success: '#10b981',
@@ -26,4 +28,3 @@ export const darkColors = {
   divider: '#4b5563',
 };
 
-export type Colors = typeof lightColors;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { Text as RNText, StyleProp, TextProps, TextStyle } from 'react-native';
 
-import { Colors, lightColors } from '../../theme';
+import { ColorKeys, lightColors } from '../../theme';
 import { typography, TypographyKey } from '../../theme/typography';
 
 interface ITextProps extends TextProps {
-  color?: keyof Colors;
+  color?: ColorKeys;
   textStyle?: StyleProp<TextStyle>;
   variant?: TypographyKey;
 }

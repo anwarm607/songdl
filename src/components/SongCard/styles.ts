@@ -7,7 +7,6 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   infoContainer: {
-    flex: 1,
     marginLeft: 12,
   },
   title: {
@@ -22,4 +21,7 @@ export const styles = StyleSheet.create({
   container: {
     marginVertical: 8,
   },
+  card: {
+    flex: 1
+  }
 });

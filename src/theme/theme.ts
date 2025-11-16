@@ -1,5 +1,8 @@
-import { lightColors, darkColors, Colors } from './colors';
+import { lightColors, darkColors } from './colors';
 
+export type ColorKeys = keyof typeof lightColors;
+
+export type Colors =  typeof lightColors;
 export interface Theme {
   colors: Colors;
 }
@@ -12,4 +15,3 @@ export const darkTheme: Theme = {
   colors: darkColors,
 };
 
-export type { Colors };

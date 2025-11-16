@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
-import { Colors } from '../../theme';
+import { ColorKeys } from '../../theme';
 import { StyleProp, ViewStyle } from 'react-native';
 
 export interface CardProps {
-  bgColor?: keyof Colors;
+  bgColor?: ColorKeys;
   borderRadius?: number;
   center?: boolean;
   children?: ReactNode;
@@ -12,5 +12,5 @@ export interface CardProps {
   style?: StyleProp<ViewStyle>;
   testID?: string;
   borderWidth?: number;
-  borderColor?: keyof Colors;
+  borderColor?: ColorKeys;
 }
