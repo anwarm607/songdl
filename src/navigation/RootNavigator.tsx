@@ -3,16 +3,18 @@ import { StatusBar, useColorScheme } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { SongListScreen } from '../screens';
-import { lightColors, typography } from '../theme';
+import { typography } from '../theme';
 import { RootStackParamList } from './types';
 import { SongDetailsScreen } from '../screens/SongDetailsScreen/SongDetailsScreen';
 import { InitialNavHeader } from './InitialNavHeader';
+import { useTheme } from '../hooks/useTheme';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export const RootNavigator: React.FC = () => {
-  const isDark = useColorScheme() === 'dark';
-  const colors = lightColors;
+  const systemColorScheme = useColorScheme();
+  const { colors, themeMode } = useTheme();
+  const isDark = themeMode === 'dark' || (themeMode === 'system' && systemColorScheme === 'dark');
 
   return (
     <>

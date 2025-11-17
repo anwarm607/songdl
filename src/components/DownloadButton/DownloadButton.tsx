@@ -1,19 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { Animated, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { DownloadIcon } from '../../assets/icons/DownloadIcon';
 import { Button } from '../Button';
 import { buttonSizes, ButtonSizesKeys } from '../Button/constants';
-import { lightColors } from '../../theme';
+import { useTheme } from '../../hooks/useTheme';
 import { Text } from '../Text';
 import { styles } from './styles';
-
-type DownloadState = 'idle' | 'downloading' | 'completed' | 'error';
+import { FolderIcon } from '../../assets/icons/FolderIcon';
+import { UI_CONSTANTS } from '../../shared/constants/ui';
 
 interface IDownloadButton {
   onPress: () => void;
   progress?: number; // 0 - 100
-  state?: DownloadState;
+  isDownloading: boolean;
+  isDownloaded: boolean;
   size?: ButtonSizesKeys;
 }
 
@@ -22,63 +23,69 @@ const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 export const DownloadButton = ({
   onPress,
   progress = 0,
-  state = 'idle',
-  size = 'm'
+  isDownloading = false,
+  size = 'm',
+  isDownloaded = false,
 }: IDownloadButton) => {
-  const colors = lightColors;
+  const { colors } = useTheme();
 
   const buttonSize = buttonSizes[size].height;
-  const BORDER_WIDTH = 2;
-  const RADIUS = (buttonSize - BORDER_WIDTH) / 2;
-  const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
+  const borderWidth = UI_CONSTANTS.BUTTON_BORDER_WIDTH;
+  const radius = useMemo(() => (buttonSize - borderWidth) / 2, [buttonSize, borderWidth]);
+  const circumference = useMemo(() => 2 * Math.PI * radius, [radius]);
+  const centerPosition = useMemo(() => buttonSize / 2, [buttonSize]);
+  const roundedProgress = useMemo(() => Math.round(progress), [progress]);
 
   const animatedProgressRef = useRef(new Animated.Value(0));
 
   useEffect(() => {
     Animated.timing(animatedProgressRef.current, {
       toValue: progress,
-      duration: 300,
+      duration: UI_CONSTANTS.PROGRESS_ANIMATION_DURATION,
       useNativeDriver: false,
     }).start();
   }, [progress]);
 
-  const isDownloading = state === 'downloading';
-
   const strokeDashoffset = animatedProgressRef.current.interpolate({
     inputRange: [0, 100],
-    outputRange: [CIRCUMFERENCE, 0],
+    outputRange: [circumference, 0],
   });
 
-  return (
-    <Button
-      onPress={onPress}
-      shape="circle"
-      variant="icon"
-      borderWidth={2}
-      size={size}
-      disabled={isDownloading}
-    >
-      <View
-        style={[styles.container, { width: buttonSize, height: buttonSize }]}
-      >
-        <Svg
-          width={buttonSize}
-          height={buttonSize}
-          viewBox={`0 0 ${buttonSize} ${buttonSize}`}
-          style={styles.svg}
-        >
+  const containerStyle = useMemo(
+    () => [styles.container, { width: buttonSize, height: buttonSize }],
+    [buttonSize],
+  );
+
+  const svgViewBox = useMemo(() => `0 0 ${buttonSize} ${buttonSize}`, [buttonSize]);
+  const circleTransform = useMemo(
+    () => `rotate(-90 ${centerPosition} ${centerPosition})`,
+    [centerPosition],
+  );
+  const strokeDasharray = useMemo(
+    () => `${circumference} ${circumference}`,
+    [circumference],
+  );
+
+  const renderContent = () => {
+    if (isDownloaded) {
+      return <FolderIcon />;
+    }
+
+    return (
+      <>
+        <Svg width={buttonSize} height={buttonSize} viewBox={svgViewBox} style={styles.svg}>
           {isDownloading && (
             <AnimatedCircle
               stroke={colors.primary}
               fill="none"
-              cx={buttonSize / 2}
-              cy={buttonSize / 2}
-              r={RADIUS}
-              strokeWidth={BORDER_WIDTH}
-              strokeDasharray={`${CIRCUMFERENCE} ${CIRCUMFERENCE}`}
+              cx={centerPosition}
+              cy={centerPosition}
+              r={radius}
+              strokeWidth={borderWidth}
+              strokeDasharray={strokeDasharray}
               strokeDashoffset={strokeDashoffset as any}
               strokeLinecap="round"
-              transform={`rotate(-90 ${buttonSize / 2} ${buttonSize / 2})`}
+              transform={circleTransform}
             />
           )}
         </Svg>
@@ -86,13 +93,26 @@ export const DownloadButton = ({
         <View style={styles.iconContainer}>
           {isDownloading ? (
             <Text variant="captionSmall" color="textSecondary">
-              {Math.round(progress)}%
+              {roundedProgress}%
             </Text>
           ) : (
             <DownloadIcon />
           )}
         </View>
-      </View>
+      </>
+    );
+  };
+
+  return (
+    <Button
+      onPress={onPress}
+      shape="circle"
+      variant="icon"
+      borderWidth={borderWidth}
+      size={size}
+      disabled={isDownloading}
+    >
+      <View style={containerStyle}>{renderContent()}</View>
     </Button>
   );
 };

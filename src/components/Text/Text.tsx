@@ -1,8 +1,9 @@
 import React from 'react';
 import { Text as RNText, StyleProp, TextProps, TextStyle } from 'react-native';
 
-import { ColorKeys, lightColors } from '../../theme';
+import { ColorKeys } from '../../theme';
 import { typography, TypographyKey } from '../../theme/typography';
+import { useTheme } from '../../hooks/useTheme';
 
 interface ITextProps extends TextProps {
   color?: ColorKeys;
@@ -19,7 +20,7 @@ export const Text = (props: ITextProps) => {
     variant,
   } = props;
 
-  const colors = lightColors;
+  const { colors } = useTheme();
 
   const textColor = colors[color];
   const variantStyle = typography[variant ?? 'bodyMedium'];

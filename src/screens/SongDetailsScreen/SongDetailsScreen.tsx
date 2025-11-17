@@ -1,53 +1,28 @@
-import { View, ScrollView } from 'react-native';
+import { useMemo } from 'react';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { Text } from '../../components/Text';
 import { RouteProp, useRoute } from '@react-navigation/native';
 import { RootStackParamList } from '../../navigation/types';
-import { mockSongs } from '../SongsList/mock';
 import { DownloadButton } from '../../components/DownloadButton';
-import { useState } from 'react';
-import { styles } from './styles';
-import { hexToRgba } from '../../shared/utils/convertRgba';
-import { lightColors } from '../../theme';
+import { createStyles } from './styles';
 import FastImage from '@d11/react-native-fast-image';
-
-const formatDuration = (seconds: number): string => {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
-  return `${mins}:${secs.toString().padStart(2, '0')}`;
-};
+import { useGetSongById } from '../../hooks';
+import { useDownloadSong } from '../../hooks/useDownloadSong';
+import { useTheme } from '../../hooks/useTheme';
+import { formatDuration } from '../../shared/utils/duration';
+import { UI_CONSTANTS } from '../../shared/constants/ui';
 
 export const SongDetailsScreen = () => {
   const { params } = useRoute<RouteProp<RootStackParamList, 'SongDetails'>>();
 
-  const song = mockSongs.find(s => s.id === params.songId);
-  const [downloadProgress, setDownloadProgress] = useState(0);
-  const [downloadState, setDownloadState] = useState<
-    'idle' | 'downloading' | 'completed' | 'error'
-  >('idle');
+  const song = useGetSongById(params.songId);
+  const { downloadState, handleButtonPress } = useDownloadSong(song);
+  const { colors } = useTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
 
-  const colors = lightColors;
-
-  const handleDownloadPress = () => {
-    if (downloadState === 'idle') {
-      setDownloadState('downloading');
-      let progress = 0;
-      const interval = setInterval(() => {
-        progress += Math.random() * 30;
-        if (progress >= 100) {
-          progress = 100;
-          clearInterval(interval);
-          setDownloadProgress(100);
-          setDownloadState('completed');
-          setTimeout(() => {
-            setDownloadProgress(0);
-            setDownloadState('idle');
-          }, 2000);
-        } else {
-          setDownloadProgress(progress);
-        }
-      }, 500);
-    }
-  };
+  const isDownloaded = downloadState?.isDownloaded ?? false;
+  const isDownloading = downloadState?.isDownloading ?? false;
+  const progress = downloadState?.progress ?? 0;
 
   if (!song) {
     return (
@@ -69,10 +44,11 @@ export const SongDetailsScreen = () => {
       >
         <View style={styles.contentContainer}>
           {/* Thumbnail */}
-          <View style={[styles.thumbnailContainer, {
-                boxShadow: `3px 10px 42px 6px ${hexToRgba(colors.black, 0.25)}`
-          }]}>
-            <FastImage source={{ uri: song.thumbnail }} style={styles.thumbnail} />
+          <View style={styles.thumbnailContainer}>
+            <FastImage
+              source={{ uri: song.thumbnail }}
+              style={styles.thumbnail}
+            />
           </View>
 
           {/* Song Information */}
@@ -111,14 +87,21 @@ export const SongDetailsScreen = () => {
             </View>
           </View>
 
-          {/* Download Button */}
+          {/* Download/Play Button */}
           <View style={styles.downloadButtonContainer}>
-            <DownloadButton
-              onPress={handleDownloadPress}
-              progress={downloadProgress}
-              state={downloadState}
-              size='xxl'
-            />
+            <TouchableOpacity
+              style={styles.downloadButtonContainer}
+              onPress={handleButtonPress}
+              activeOpacity={UI_CONSTANTS.ACTIVE_OPACITY}
+            >
+              <DownloadButton
+                onPress={handleButtonPress}
+                isDownloading={isDownloading}
+                progress={progress}
+                size="xxl"
+                isDownloaded={isDownloaded}
+              />
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>

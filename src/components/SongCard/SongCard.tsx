@@ -4,35 +4,44 @@ import { styles } from './styles';
 import { Row } from '../Row';
 import { Text } from '../Text';
 import { DownloadButton } from '../DownloadButton';
-import FastImage from "@d11/react-native-fast-image";
+import FastImage from '@d11/react-native-fast-image';
+import { useDownloadSong } from '../../hooks/useDownloadSong';
+import { UI_CONSTANTS } from '../../shared/constants/ui';
+import { Song } from '../../screens/SongsList/types';
 
 interface ISongCardProps {
-  song: { thumbnail: string; title: string; artist: string; album: string };
+  song: Song;
   onPress: () => void;
 }
 
 export const SongCard = ({ song, onPress }: ISongCardProps) => {
-  const handleDownload = () => {
-    console.log('Downloading...');
-  };
+  const { downloadState, handleButtonPress } = useDownloadSong(song);
+
+  const isDownloaded = downloadState?.isDownloaded ?? false;
+  const isDownloading = downloadState?.isDownloading ?? false;
+  const progress = downloadState?.progress ?? 0;
+
   return (
     <TouchableOpacity
       onPress={onPress}
       style={styles.container}
-      activeOpacity={0.7}
+      activeOpacity={UI_CONSTANTS.ACTIVE_OPACITY}
     >
       <Card
         pv={12}
         ph={12}
         borderRadius={12}
         borderColor="border"
-        borderWidth={1}
+        borderWidth={UI_CONSTANTS.DEFAULT_BORDER_WIDTH}
         style={styles.card}
       >
         <Row center isSpaceBetween style={styles.outerRow}>
           <Row center style={styles.innerRow}>
             {/* Thumbnail */}
-            <FastImage source={{ uri: song.thumbnail }} style={styles.thumbnail} />
+            <FastImage
+              source={{ uri: song.thumbnail }}
+              style={styles.thumbnail}
+            />
 
             {/* Song Info */}
             <View style={styles.infoContainer}>
@@ -61,14 +70,19 @@ export const SongCard = ({ song, onPress }: ISongCardProps) => {
             </View>
           </Row>
 
-          {/* Download Button */}
-          <View style={styles.downloadButtonContainer}>
+          {/* Download/Play Button */}
+          <TouchableOpacity
+            style={styles.downloadButtonContainer}
+            onPress={handleButtonPress}
+            activeOpacity={UI_CONSTANTS.ACTIVE_OPACITY}
+          >
             <DownloadButton
-              onPress={handleDownload}
-              state="downloading"
-              progress={10}
+              isDownloaded={isDownloaded}
+              onPress={handleButtonPress}
+              isDownloading={isDownloading}
+              progress={progress}
             />
-          </View>
+          </TouchableOpacity>
         </Row>
       </Card>
     </TouchableOpacity>

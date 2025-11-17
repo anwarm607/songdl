@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleProp, View, ViewStyle} from 'react-native';
 
 import { CardProps } from './types';
-import { lightColors } from '../../theme';
+import { useTheme } from '../../hooks/useTheme';
 
 
 export const Card = ({
@@ -17,7 +17,7 @@ export const Card = ({
   borderColor = 'surface',
   testID = 'card-test-id',
 }: CardProps) => {
-  const colors = lightColors;
+  const { colors } = useTheme();
 
   const background = colors[bgColor];
 

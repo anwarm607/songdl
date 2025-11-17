@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
-import { lightColors } from "../../theme";
+import { hexToRgba } from "../../shared/utils/convertRgba";
+import { Colors } from "../../theme";
 
-export const styles = StyleSheet.create({
+export const createStyles = (colors: Colors) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: lightColors.background,
+    backgroundColor: colors.background,
   },
   scrollContent: {
     flexGrow: 1,
@@ -18,6 +19,8 @@ export const styles = StyleSheet.create({
     alignSelf: 'center',
     marginBottom: 40,
     borderRadius: 20,
+    boxShadow: `3px 10px 42px 6px ${hexToRgba(colors.black, 0.25)}`
+
   },
   thumbnail: {
     width: '100%',
@@ -48,11 +51,11 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 8,
-    backgroundColor: lightColors.surface,
+    backgroundColor: colors.surface,
   },
   durationText: {
     fontSize: 12,
-    color: lightColors.textSecondary,
+    color: colors.textSecondary,
   },
   downloadButtonContainer: {
     alignItems: 'center',

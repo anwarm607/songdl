@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { ReactNode } from 'react';
 import { buttonSizes, ButtonSizesKeys } from './constants';
-import { lightColors } from '../../theme';
+import { useTheme } from '../../hooks/useTheme';
 import { styles } from './styles';
 import { ColorKeys } from '../../theme';
 
@@ -27,7 +27,7 @@ export const Button = (props: IButton) => {
     borderColor = 'border',
     disabled
   } = props;
-  const colors = lightColors;
+  const { colors } = useTheme();
   const getShapeStyles = () => {
     const sizeConfig = buttonSizes[size];
     if (shape === 'circle') {

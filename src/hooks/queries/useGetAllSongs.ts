@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { Config } from 'react-native-config';
-import { paths } from '../config/api';
-import { Song } from '../screens/SongsList/types';
+import { paths } from '../../config/api';
+import { Song } from '../../screens/SongsList/types';
 import axios from 'axios';
 
 interface GetAllSongsParams {
@@ -22,6 +22,7 @@ const getAllSongs = async (
   try {
     const { pageNo, pageSize } = params;
     const url = `${Config.BASE_URL}${paths.fetchSongs}?pageNumber=${pageNo}&pageSize=${pageSize}`;
+    console.log('url', url);
 
     const response = await axios({
       url,
@@ -30,7 +31,6 @@ const getAllSongs = async (
 
     return response.data;
   } catch (error) {
-    console.error('[API] Error occurred:', error);
     throw error;
   }
 };
@@ -43,12 +43,10 @@ export const useGetAllSongsInfinite = (pageSize: number) => {
       return result;
     },
     getNextPageParam: (lastPage: GetAllSongsResponse, pages) => {
-      // Get the actual page number from the response
       const currentPageNumber =
         lastPage.pageNumber ??
         pages.length;
 
-      // If current page is less than total pages, there are more pages to fetch
       return currentPageNumber < lastPage.totalPages
         ? currentPageNumber + 1
         : undefined;

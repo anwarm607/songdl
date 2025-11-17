@@ -1799,6 +1799,34 @@ PODS:
     - React-RCTFBReactNativeSpec
     - ReactCommon/turbomodule/core
     - SocketRocket
+  - react-native-blob-util (0.23.2):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
+    - Yoga
   - react-native-config (1.6.0):
     - react-native-config/App (= 1.6.0)
   - react-native-config/App (1.6.0):
@@ -2455,6 +2483,8 @@ PODS:
     - React-perflogger (= 0.82.1)
     - React-utils (= 0.82.1)
     - SocketRocket
+  - RNDeviceInfo (15.0.1):
+    - React-Core
   - RNFastImage (8.13.0):
     - boost
     - DoubleConversion
@@ -2485,10 +2515,41 @@ PODS:
     - ReactCommon/turbomodule/core
     - SDWebImage (>= 5.19.1)
     - SDWebImageAVIFCoder (~> 0.11.0)
+    - SDWebImageSVGCoder (~> 1.7.0)
     - SDWebImageWebPCoder (~> 0.14)
     - SocketRocket
     - Yoga
+  - RNFileViewer (2.1.5):
+    - React-Core
   - RNGestureHandler (2.29.1):
+    - boost
+    - DoubleConversion
+    - fast_float
+    - fmt
+    - glog
+    - hermes-engine
+    - RCT-Folly
+    - RCT-Folly/Fabric
+    - RCTRequired
+    - RCTTypeSafety
+    - React-Core
+    - React-debug
+    - React-Fabric
+    - React-featureflags
+    - React-graphics
+    - React-ImageManager
+    - React-jsi
+    - React-NativeModulesApple
+    - React-RCTFabric
+    - React-renderercss
+    - React-rendererdebug
+    - React-utils
+    - ReactCodegen
+    - ReactCommon/turbomodule/bridging
+    - ReactCommon/turbomodule/core
+    - SocketRocket
+    - Yoga
+  - RNPermissions (5.4.4):
     - boost
     - DoubleConversion
     - fast_float
@@ -2688,6 +2749,7 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
   - React-microtasksnativemodule (from `../node_modules/react-native/ReactCommon/react/nativemodule/microtasks`)
+  - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - react-native-config (from `../node_modules/react-native-config`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
@@ -2722,8 +2784,11 @@ DEPENDENCIES:
   - ReactAppDependencyProvider (from `build/generated/ios`)
   - ReactCodegen (from `build/generated/ios`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
+  - RNDeviceInfo (from `../node_modules/react-native-device-info`)
   - "RNFastImage (from `../node_modules/@d11/react-native-fast-image`)"
+  - RNFileViewer (from `../node_modules/react-native-file-viewer`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - SDWebImageSVGCoder
@@ -2823,6 +2888,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   React-microtasksnativemodule:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/microtasks"
+  react-native-blob-util:
+    :path: "../node_modules/react-native-blob-util"
   react-native-config:
     :path: "../node_modules/react-native-config"
   react-native-safe-area-context:
@@ -2891,10 +2958,16 @@ EXTERNAL SOURCES:
     :path: build/generated/ios
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
+  RNDeviceInfo:
+    :path: "../node_modules/react-native-device-info"
   RNFastImage:
     :path: "../node_modules/@d11/react-native-fast-image"
+  RNFileViewer:
+    :path: "../node_modules/react-native-file-viewer"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNScreens:
     :path: "../node_modules/react-native-screens"
   RNSVG:
@@ -2946,6 +3019,7 @@ SPEC CHECKSUMS:
   React-logger: 500f2fa5697d224e63c33d913c8a4765319e19bf
   React-Mapbuffer: 06d59c448da7e34eb05b3fb2189e12f6a30fec57
   React-microtasksnativemodule: d1ee999dc9052e23f6488b730fa2d383a4ea40e5
+  react-native-blob-util: d59901fee49a23587af72dffe4451fb25ebe6d49
   react-native-config: c45f992856651ec4c05251431ea57a18ceaa8ae4
   react-native-safe-area-context: c00143b4823773bba23f2f19f85663ae89ceb460
   React-NativeModulesApple: 46690a0fe94ec28fc6fc686ec797b911d251ded0
@@ -2980,8 +3054,11 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: a45ef34bb22dc1c9b2ac1f74167d9a28af961176
   ReactCodegen: 878add6c7d8ff8cea87697c44d29c03b79b6f2d9
   ReactCommon: 804dc80944fa90b86800b43c871742ec005ca424
-  RNFastImage: 6ab0df413b248a7b5197d5ea6fd144860c97ea88
+  RNDeviceInfo: 36d7f232bfe7c9b5c494cb7793230424ed32c388
+  RNFastImage: b076a6378b1ce90debc27a927a437db3652bef14
+  RNFileViewer: 4b5d83358214347e4ab2d4ca8d5c1c90d869e251
   RNGestureHandler: e1cf8ef3f11045536eed6bd4f132b003ef5f9a5f
+  RNPermissions: e5dd84f29e7a3871451f88efa83dfa6227806b51
   RNScreens: d821082c6dd1cb397cc0c98b026eeafaa68be479
   RNSVG: 005860704c95493cd23a417dfbeb76dcd8bb7042
   SDWebImage: 16309af6d214ba3f77a7c6f6fdda888cb313a50a

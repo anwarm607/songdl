@@ -1,9 +1,9 @@
 import Svg, { Path } from 'react-native-svg';
-import { lightColors } from '../../theme';
+import { useTheme } from '../../hooks/useTheme';
 import { IconProps } from '../../shared/types/icon';
 
 export const BackIcon = (props: IconProps) => {
-  const colors = lightColors;
+  const { colors } = useTheme();
   const themeColor = colors[props.color || 'primary'];
   return (
     <Svg
