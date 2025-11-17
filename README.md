@@ -1,97 +1,343 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# SongDL
 
-# Getting Started
+A React Native application for downloading and managing songs.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## Prerequisites
 
-## Step 1: Start Metro
+Before running the app, ensure you have the following installed:
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+- **Node.js** (>= 20) - [Download](https://nodejs.org/)
+- **Yarn** (v1.22.22) - Package manager
+- **React Native CLI** - Development environment
+- **Xcode** (for iOS development on macOS) - [Download from App Store](https://apps.apple.com/us/app/xcode/id497799835)
+- **Android Studio** (for Android development) - [Download](https://developer.android.com/studio)
+- **CocoaPods** (for iOS dependencies) - Installed via Ruby bundler
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+### Environment Setup
+
+1. **Install React Native dependencies:**
+   ```sh
+   npm install -g react-native-cli
+   ```
+
+2. **For iOS (macOS only):**
+   - Install Xcode from the App Store
+   - Install Xcode Command Line Tools:
+     ```sh
+     xcode-select --install
+     ```
+   - Install CocoaPods:
+     ```sh
+     sudo gem install cocoapods
+     ```
+
+3. **For Android:**
+   - Install Android Studio
+   - Set up Android SDK and environment variables
+   - Create an Android Virtual Device (AVD) or connect a physical device
+
+## Installation
+
+1. **Clone the repository:**
+   ```sh
+   git clone <repository-url>
+   cd SongDL
+   ```
+
+2. **Install dependencies:**
+   ```sh
+   yarn install
+   ```
+
+3. **Install iOS dependencies (macOS only):**
+   ```sh
+   cd ios
+   bundle install
+   bundle exec pod install
+   cd ..
+   ```
+
+## Running the App
+
+### Start Metro Bundler
+
+In the root directory, start the Metro bundler:
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
 yarn start
 ```
 
-## Step 2: Build and run your app
+Keep this terminal window open. Metro will automatically reload when you make changes to your code.
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+### Run on iOS
 
-### Android
-
+**First time setup:**
 ```sh
-# Using npm
-npm run android
-
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
+cd ios
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
+cd ..
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
+**Run the app:**
 ```sh
-# Using npm
-npm run ios
-
-# OR using Yarn
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+This will:
+- Build the iOS app
+- Launch the iOS Simulator
+- Install and run the app
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+**Note:** Make sure you have an iOS Simulator available or a physical iOS device connected.
 
-## Step 3: Modify your app
+### Run on Android
 
-Now that you have successfully run the app, let's make changes!
+**Prerequisites:**
+- Android Studio installed
+- Android SDK configured
+- An Android emulator running or a physical device connected with USB debugging enabled
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+**Run the app:**
+```sh
+yarn android
+```
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+This will:
+- Build the Android app
+- Install it on the connected device/emulator
+- Launch the app
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+**Note:** Make sure your Android emulator is running or a device is connected before running this command.
 
-## Congratulations! :tada:
+## Development Tips
 
-You've successfully run and modified your React Native App. :partying_face:
+### Fast Refresh
 
-### Now what?
+The app supports Fast Refresh, which means changes you make to the code will automatically appear in the app without needing to manually reload.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### Manual Reload
 
-# Troubleshooting
+If you need to manually reload the app:
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+- **Android:**
+  - Press `R` twice in the Metro terminal, or
+  - Press `Ctrl + M` (Windows/Linux) or `Cmd + M` (macOS) to open Dev Menu, then select "Reload"
 
-# Learn More
+- **iOS:**
+  - Press `Cmd + R` in the iOS Simulator, or
+  - Shake the device and select "Reload"
 
-To learn more about React Native, take a look at the following resources:
+### Debugging
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+- **React Native Debugger:** Use React Native Debugger or Chrome DevTools
+- **Reactotron:** The app includes Reactotron for debugging (only in development mode)
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Metro bundler cache issues:**
+   ```sh
+   yarn start --reset-cache
+   ```
+
+2. **iOS build issues:**
+   ```sh
+   cd ios
+   rm -rf Pods Podfile.lock
+   bundle exec pod install
+   cd ..
+   ```
+
+3. **Android build issues:**
+   ```sh
+   cd android
+   ./gradlew clean
+   cd ..
+   ```
+
+4. **Node modules issues:**
+   ```sh
+   rm -rf node_modules
+   yarn install
+   ```
+
+5. **iOS Simulator not launching:**
+   - Open Xcode → Preferences → Locations → Command Line Tools
+   - Ensure the correct Xcode version is selected
+
+6. **Android emulator not found:**
+   - Open Android Studio
+   - Go to Tools → Device Manager
+   - Create a new virtual device or start an existing one
+
+### Clearing All Caches
+
+If you're experiencing persistent issues:
+
+```sh
+# Clear Metro cache
+yarn start --reset-cache
+
+# Clear watchman (if installed)
+watchman watch-del-all
+
+# Clear node modules and reinstall
+rm -rf node_modules
+yarn install
+
+# For iOS
+cd ios
+rm -rf Pods Podfile.lock build
+bundle exec pod install
+cd ..
+
+# For Android
+cd android
+./gradlew clean
+cd ..
+```
+
+## Project Structure
+
+```
+SongDL/
+├── __tests__/                 # Test files
+│   └── App.test.tsx          # Main app test
+│
+├── android/                   # Android native code
+│   ├── app/                  # Android app module
+│   │   ├── src/              # Android source files
+│   │   └── build.gradle      # Android build configuration
+│   ├── build.gradle          # Root Android build config
+│   ├── gradle/               # Gradle wrapper files
+│   └── settings.gradle       # Gradle settings
+│
+├── ios/                      # iOS native code
+│   ├── Pods/                 # CocoaPods dependencies
+│   ├── SongDL/               # iOS app source
+│   │   ├── AppDelegate.swift # iOS app delegate
+│   │   └── Info.plist        # iOS app configuration
+│   ├── Podfile               # CocoaPods dependencies file
+│   └── SongDL.xcworkspace    # Xcode workspace
+│
+├── src/                      # Main application source code
+│   ├── assets/               # Static assets
+│   │   └── icons/            # SVG icon components
+│   │       ├── BackIcon.tsx
+│   │       ├── DownloadIcon.tsx
+│   │       └── FolderIcon.tsx
+│   │
+│   ├── components/           # Reusable UI components
+│   │   ├── Button/           # Button component
+│   │   │   ├── Button.tsx
+│   │   │   ├── constants.ts
+│   │   │   ├── index.ts
+│   │   │   └── styles.ts
+│   │   ├── Card/             # Card component
+│   │   │   ├── Card.tsx
+│   │   │   ├── index.ts
+│   │   │   └── types.ts
+│   │   ├── DownloadButton/   # Download button component
+│   │   │   ├── DownloadButton.tsx
+│   │   │   ├── index.ts
+│   │   │   └── styles.ts
+│   │   ├── Row/              # Row layout component
+│   │   │   ├── Row.tsx
+│   │   │   ├── index.ts
+│   │   │   └── types.ts
+│   │   ├── SongCard/         # Song card component
+│   │   │   ├── SongCard.tsx
+│   │   │   ├── index.ts
+│   │   │   └── styles.ts
+│   │   └── Text/             # Text component
+│   │       ├── Text.tsx
+│   │       └── index.ts
+│   │
+│   ├── config/               # Configuration files
+│   │   ├── api.ts            # API endpoints configuration
+│   │   └── queryClient.ts    # React Query client setup
+│   │
+│   ├── hooks/                # Custom React hooks
+│   │   ├── queries/          # React Query hooks
+│   │   │   ├── useGetAllSongs.ts
+│   │   │   └── useGetSongById.ts
+│   │   ├── useDownloadSong.ts # Download functionality hook
+│   │   ├── useTheme.ts       # Theme management hook
+│   │   └── index.ts          # Hooks barrel export
+│   │
+│   ├── navigation/           # Navigation configuration
+│   │   ├── RootNavigator.tsx # Main navigation setup
+│   │   ├── InitialNavHeader.tsx # Initial screen header
+│   │   ├── styles.ts         # Navigation styles
+│   │   ├── types.ts          # Navigation type definitions
+│   │   └── index.ts          # Navigation exports
+│   │
+│   ├── screens/              # Screen components
+│   │   ├── SongsList/        # Songs list screen
+│   │   │   ├── SongListScreen.tsx
+│   │   │   ├── styles.ts
+│   │   │   ├── types.ts
+│   │   │   └── index.ts
+│   │   ├── SongDetailsScreen/ # Song details screen
+│   │   │   ├── SongDetailsScreen.tsx
+│   │   │   └── styles.ts
+│   │   └── index.ts          # Screens barrel export
+│   │
+│   ├── shared/               # Shared utilities and constants
+│   │   ├── constants/        # Shared constants
+│   │   │   └── ui.ts         # UI constants
+│   │   ├── types/            # Shared type definitions
+│   │   │   └── icon.ts       # Icon type definitions
+│   │   └── utils/            # Utility functions
+│   │       ├── convertRgba.ts # RGBA color conversion
+│   │       ├── downloadManager.ts # Download management
+│   │       └── duration.ts   # Duration formatting
+│   │
+│   ├── store/                # State management (Zustand)
+│   │   ├── slices/           # State slices
+│   │   │   ├── downloadSlice.ts # Download state management
+│   │   │   └── themeSlice.ts # Theme state management
+│   │   ├── types.ts          # Store type definitions
+│   │   └── index.ts          # Store exports
+│   │
+│   └── theme/                # Theme configuration
+│       ├── colors.ts         # Color definitions
+│       ├── typography.ts     # Typography definitions
+│       ├── theme.ts          # Theme object
+│       └── index.ts          # Theme exports
+│
+├── App.tsx                   # Root application component
+├── index.js                  # Application entry point
+├── app.json                  # App configuration
+├── babel.config.js           # Babel configuration
+├── metro.config.js           # Metro bundler configuration
+├── jest.config.js            # Jest test configuration
+├── tsconfig.json             # TypeScript configuration
+├── package.json              # Node.js dependencies and scripts
+├── yarn.lock                 # Yarn lock file
+├── Gemfile                   # Ruby dependencies (for CocoaPods)
+├── Gemfile.lock              # Ruby lock file
+└── ReactotronConfig.js       # Reactotron debugging configuration
+```
+
+## Key Technologies
+
+- **React Native** (0.82.1) - Mobile framework
+- **TypeScript** - Type safety
+- **React Navigation** - Navigation library
+- **Zustand** - State management
+- **React Query (TanStack Query)** - Data fetching and caching
+- **Axios** - HTTP client
+- **React Native Fast Image** - Optimized image loading
+- **React Native Blob Util** - File download management
+- **React Native Permissions** - Permission handling
+
+## Scripts
+
+- `yarn start` - Start Metro bundler
+- `yarn android` - Run on Android
+- `yarn ios` - Run on iOS
+- `yarn test` - Run tests
+- `yarn lint` - Run ESLint
