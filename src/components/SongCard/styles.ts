@@ -11,6 +11,7 @@ export const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 4,
+    width: 180
   },
   artist: {
     marginBottom: 2,

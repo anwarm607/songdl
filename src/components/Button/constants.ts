@@ -19,6 +19,11 @@ export const buttonSizes = {
     width: 300,
     borderRadius: 22,
   },
+  xxl: {
+    height: 80,
+    width: 360,
+    borderRadius: 24,
+  },
 };
 
 export type ButtonSizesKeys = keyof typeof buttonSizes;

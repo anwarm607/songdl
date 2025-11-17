@@ -1,9 +1,10 @@
-import { Image, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Card } from '../Card';
 import { styles } from './styles';
 import { Row } from '../Row';
 import { Text } from '../Text';
 import { DownloadButton } from '../DownloadButton';
+import FastImage from "@d11/react-native-fast-image";
 
 interface ISongCardProps {
   song: { thumbnail: string; title: string; artist: string; album: string };
@@ -31,7 +32,7 @@ export const SongCard = ({ song, onPress }: ISongCardProps) => {
         <Row center isSpaceBetween style={styles.outerRow}>
           <Row center style={styles.innerRow}>
             {/* Thumbnail */}
-            <Image source={{ uri: song.thumbnail }} style={styles.thumbnail} />
+            <FastImage source={{ uri: song.thumbnail }} style={styles.thumbnail} />
 
             {/* Song Info */}
             <View style={styles.infoContainer}>

@@ -11,6 +11,7 @@ export const lightColors = {
   error: '#ef4444',
   warning: '#f59e0b',
   divider: '#e5e7eb',
+  black: '#1f2937',
 };
 
 export const darkColors = {
@@ -26,5 +27,5 @@ export const darkColors = {
   error: '#ef4444',
   warning: '#f59e0b',
   divider: '#4b5563',
+  black: '#1f2937',
 };
-

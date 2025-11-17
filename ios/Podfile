@@ -23,6 +23,9 @@ target 'SongDL' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # Add SDWebImageSVGCoder for react-native-fast-image
+  pod 'SDWebImageSVGCoder'
+
   post_install do |installer|
     react_native_post_install(
       installer,

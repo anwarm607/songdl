@@ -3,7 +3,7 @@ import { Animated, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { DownloadIcon } from '../../assets/icons/DownloadIcon';
 import { Button } from '../Button';
-import { buttonSizes } from '../Button/constants';
+import { buttonSizes, ButtonSizesKeys } from '../Button/constants';
 import { lightColors } from '../../theme';
 import { Text } from '../Text';
 import { styles } from './styles';
@@ -14,6 +14,7 @@ interface IDownloadButton {
   onPress: () => void;
   progress?: number; // 0 - 100
   state?: DownloadState;
+  size?: ButtonSizesKeys;
 }
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
@@ -22,10 +23,11 @@ export const DownloadButton = ({
   onPress,
   progress = 0,
   state = 'idle',
+  size = 'm'
 }: IDownloadButton) => {
   const colors = lightColors;
 
-  const buttonSize = buttonSizes.m.height;
+  const buttonSize = buttonSizes[size].height;
   const BORDER_WIDTH = 2;
   const RADIUS = (buttonSize - BORDER_WIDTH) / 2;
   const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
@@ -53,6 +55,7 @@ export const DownloadButton = ({
       shape="circle"
       variant="icon"
       borderWidth={2}
+      size={size}
       disabled={isDownloading}
     >
       <View

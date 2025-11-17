@@ -9,6 +9,14 @@ export const styles = StyleSheet.create({
     paddingBottom: 8,
   },
   listContainer: {
-    paddingHorizontal: 20
+    paddingHorizontal: 20,
+  },
+  containerCenter: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    flex:1 
   }
 });
