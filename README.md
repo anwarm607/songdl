@@ -2,6 +2,9 @@
 
 A React Native application for downloading and managing songs.
 
+# Demo
+https://github.com/user-attachments/assets/a1b47e16-1904-4f72-918b-053c8b4908d7
+
 ## Prerequisites
 
 Before running the app, ensure you have the following installed:
